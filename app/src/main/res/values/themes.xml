@@ -14,4 +14,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+<!--    untuk membuat button tanpa warna (hanya garis border)-->
+    <style name="Button.OutlineBox" parent="Widget.MaterialComponents.Button.OutlinedButton"/>
 </resources>
