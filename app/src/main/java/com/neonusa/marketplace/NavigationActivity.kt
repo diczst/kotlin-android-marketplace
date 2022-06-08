@@ -33,7 +33,10 @@ class NavigationActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_cart
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // ini dikomentari agar bottomnav tidak berhubungan lagi dengan actionbar yang telah dihilangkan
+        // pada values/themes.xml
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navView.setupWithNavController(navController)
 
         // mengecek menu yang ditekan oleh user

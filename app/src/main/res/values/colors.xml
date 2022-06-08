@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">@color/colorPrimary_500</color>
+    <color name="colorPrimaryVariant">@color/colorPrimary_700</color>
+    <color name="colorOnPrimary">@color/white</color>
+    
+<!--    tangga warna-->
+    <color name="colorPrimary_800">#1565c0</color>
+    <color name="colorPrimary_700">#1976d2</color>
+    <color name="colorPrimary_600">#1e88e5</color>
+    <color name="colorPrimary_500">#2196f3</color>
+    <color name="colorPrimary_400">#42a5f5</color>
+
 </resources>
