@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import com.neonusa.marketplace.databinding.ActivityLoginBinding
 import com.neonusa.marketplace.util.Prefs
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
+
+    // membuat objek viewmodel
+    private val viewModel:  LoginViewModel by viewModel()
 
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding!!
@@ -17,23 +21,24 @@ class LoginActivity : AppCompatActivity() {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val s = Prefs(this)
-        if(s.getIsLogin()){
-            binding.tvStatus.text = "Sudah login"
-        } else {
-            binding.tvStatus.text = "Belum login"
-        }
+        setData()
+    }
+
+    fun setData() {
+        viewModel.text.observe(this, {
+            binding.edtEmail.setText(it)
+        })
 
         binding.btnLogin.setOnClickListener {
-            s.setIsLogin(true)
-            onBackPressed()
+            viewModel.ubahData()
         }
+    }
 
-        binding.btnLogout.setOnClickListener {
-            s.setIsLogin(false)
-            onBackPressed()
+    fun testing() {
+        val s = Prefs(this)
+        if (s.getIsLogin()) {
+            binding.tvStatus.text = "SUDAH LOGIN"
+            Log.d("RESPON", "PESAN SINGKAT")
         }
-
-        Log.d("TAG", "Hello dari LoginActivity")
     }
 }
