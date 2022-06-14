@@ -3,6 +3,7 @@ package com.neonusa.marketplace.ui.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
 import com.neonusa.marketplace.databinding.ActivityLoginBinding
 import com.neonusa.marketplace.util.Prefs
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,7 +31,28 @@ class LoginActivity : AppCompatActivity() {
         })
 
         binding.btnLogin.setOnClickListener {
-            viewModel.ubahData()
+
+            // body: LoginRequest
+            // akan sama dengan sebuah objek LoginRequest yang memiliki atribut-atribut sbb:
+
+            // - body.email
+            // - body.password
+
+            // bentuk json:
+            // body {
+            //  "email" : "",
+            //  "password" = "",
+            // }
+
+
+
+            val body = LoginRequest(
+                binding.edtEmail.text.toString(),
+                binding.edtPassword.text.toString()
+            )
+
+            viewModel.login(body).observe(this, {
+            })
         }
     }
 

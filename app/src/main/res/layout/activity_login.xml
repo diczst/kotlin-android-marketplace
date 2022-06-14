@@ -24,8 +24,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:text="email@mail.com" />
+                android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--        masukkan ke TextInputLayout untuk mendapatkan fitur-->
@@ -43,8 +42,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:text="12345" />
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
