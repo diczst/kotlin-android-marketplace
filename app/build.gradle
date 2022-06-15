@@ -47,6 +47,7 @@ dependencies {
 
 
     // ViewModel dan LiveData (Tutorial menggunakan versi 2.3.1)
+    // default versi 2.4.1
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
