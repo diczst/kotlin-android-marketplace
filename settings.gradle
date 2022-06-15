@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        // untuk menggunakan library mas inyong
+        maven { url "https://jitpack.io" }
     }
 }
 rootProject.name = "Marketplace"

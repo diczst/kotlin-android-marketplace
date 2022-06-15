@@ -67,4 +67,7 @@ dependencies {
     // Tujuannya agar ukuran view tetap sama di device apapun
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    // library mas inyong tisto
+    implementation 'com.github.TistoW:MyHelper:1.1.30'
 }

@@ -1,6 +1,7 @@
 package com.neonusa.marketplace.core.data.repository
 
 import android.util.Log
+import com.inyongtisto.myhelper.extension.getErrorBody
 import com.neonusa.marketplace.core.data.source.local.LocalDataSource
 import com.neonusa.marketplace.core.data.source.remote.RemoteDataSource
 import com.neonusa.marketplace.core.data.source.remote.network.Resource
@@ -19,7 +20,16 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
 
                     Log.d("TAG", "login: $body")
                 } else {
-                    emit(Resource.error(it.body()?.message ?: "Error Default", null))
+
+                    // REMINDER : method getErrorBody ini berasal dari library milik mas inyong tisto
+
+                    // dalam kasus aplikasi marketplace
+                    emit(Resource.error( it.getErrorBody()?.message ?: "Error Default", null))
+
+                    // dalam kasus lain apabila error response berbeda
+//                    emit(Resource.error( it.getErrorBody(ErrorCustom::class.java)?
+//                                             .namaAtribut ?: "Error Default", null))
+
                     Log.e("Login Error : ", it.message())
                 }
             }
@@ -29,5 +39,12 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+    // beberapa kasus jika jsonObject errorbody berbeda maka buat class baru dengan
+    // atribut-atribut yang sama seperti yang ada di api
+    class ErrorCustom(
+        val ok: Boolean,
+        val error_code: Int,
+        val description: String? = null
+    )
 
 }
