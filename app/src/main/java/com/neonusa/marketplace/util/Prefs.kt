@@ -1,29 +1,20 @@
 package com.neonusa.marketplace.util
 
-import android.app.Activity
-import android.content.Context
-import android.content.SharedPreferences
+import com.chibatching.kotpref.KotprefModel
+import com.inyongtisto.myhelper.extension.toJson
+import com.inyongtisto.myhelper.extension.toModel
+import com.neonusa.marketplace.core.data.source.model.User
 
-class Prefs(activity: Activity) {
+object Prefs: KotprefModel() {
+    var isLogin by booleanPref(false)
+    var user by stringPref()
 
-    private var sp: SharedPreferences? = null
-    private val login = "login"
-
-    // Nama preferences diisi bebas
-    init {
-        sp = activity.getSharedPreferences("MYPREF", Context.MODE_PRIVATE)
+    fun setUser(user: User?){
+        this.user = user.toJson()
     }
 
-    // key : value
-    // login : value
-    // mengisi nilai boolean pada key login
-    fun setIsLogin(value: Boolean) {
-        sp!!.edit().putBoolean(login, value).apply()
-    }
-
-    // mendapatkan nilai boolean yang dimiliki key login
-    // key login memiliki default value:false
-    fun getIsLogin(): Boolean {
-        return sp!!.getBoolean(login, false)
+    fun getUser(): User? {
+        if(user.isEmpty()) return null
+        return user.toModel(User::class.java)
     }
 }

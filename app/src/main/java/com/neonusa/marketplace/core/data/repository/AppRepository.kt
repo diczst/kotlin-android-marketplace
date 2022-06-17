@@ -6,6 +6,7 @@ import com.neonusa.marketplace.core.data.source.local.LocalDataSource
 import com.neonusa.marketplace.core.data.source.remote.RemoteDataSource
 import com.neonusa.marketplace.core.data.source.remote.network.Resource
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
+import com.neonusa.marketplace.util.Prefs
 import kotlinx.coroutines.flow.flow
 
 class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
@@ -15,7 +16,11 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         try {
             remote.login(data).let {
                 if (it.isSuccessful) {
+                    Prefs.isLogin = true
                     val body = it.body()
+                    val user = body?.data
+
+                    Prefs.setUser(user)
                     emit(Resource.success(body?.data))
 
                     Log.d("TAG", "login: $body")

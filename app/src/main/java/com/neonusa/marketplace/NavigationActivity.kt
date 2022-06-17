@@ -30,7 +30,7 @@ class NavigationActivity : AppCompatActivity() {
         // persiapan untuk mengecek menu mana yang ditekan oleh user
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_cart
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_account, R.id.navigation_cart
             )
         )
         // ini dikomentari agar bottomnav tidak berhubungan lagi dengan actionbar yang telah dihilangkan
@@ -45,8 +45,7 @@ class NavigationActivity : AppCompatActivity() {
 
         navView.setOnItemSelectedListener {
             if(it.itemId == R.id.navigation_cart){
-                val sharedPrefs = Prefs(this)
-                if(sharedPrefs.getIsLogin()){
+                if(Prefs.isLogin){
                     Log.d("TAG", "Sudah login")
                     navController.navigate(it.itemId)
                 } else {

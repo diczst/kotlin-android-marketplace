@@ -3,8 +3,11 @@ package com.neonusa.marketplace.ui.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
+import com.inyongtisto.myhelper.extension.dismisLoading
+import com.inyongtisto.myhelper.extension.pushActivity
+import com.inyongtisto.myhelper.extension.showLoading
+import com.neonusa.marketplace.NavigationActivity
 import com.neonusa.marketplace.core.data.source.remote.network.State
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
 import com.neonusa.marketplace.databinding.ActivityLoginBinding
@@ -51,29 +54,19 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(body).observe(this) {
             when(it.state){
                 State.SUCCESS -> {
-                    binding.progressbarLoading.visibility = View.INVISIBLE
+                    dismisLoading()
                     Toast.makeText(this, "Selamat datang : ${it.data?.name}", Toast.LENGTH_SHORT).show()
+                    pushActivity(NavigationActivity::class.java)
                 }
                 State.ERROR -> {
-                    binding.progressbarLoading.visibility = View.INVISIBLE
+                    dismisLoading()
                     Toast.makeText(this, it.message ?: "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                 }
                 State.LOADING -> {
-                    // kalau bisa delay loadingnya 2 detik biar kayak ecommerce gitu hehe
-                    binding.progressbarLoading.visibility = View.VISIBLE
+                    showLoading()
                 }
             }
 
-        }
-    }
-
-
-
-    fun testing() {
-        val s = Prefs(this)
-        if (s.getIsLogin()) {
-            binding.tvStatus.text = "SUDAH LOGIN"
-            Log.d("RESPON", "PESAN SINGKAT")
         }
     }
 
