@@ -1,6 +1,7 @@
 package com.neonusa.marketplace.core.data.source.remote.network
 
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
+import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.core.data.source.remote.response.LoginResponse
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -17,7 +18,8 @@ interface ApiService {
 
     @POST("register")
     suspend fun register(
-        //@Body user: User
-    ): Response<RequestBody>
+        @Body
+        registerRequest: RegisterRequest
+    ): Response<LoginResponse>
 
 }

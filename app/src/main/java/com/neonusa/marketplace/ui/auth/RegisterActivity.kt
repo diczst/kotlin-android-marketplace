@@ -1,44 +1,50 @@
-package com.neonusa.marketplace.ui.login
+package com.neonusa.marketplace.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.inyongtisto.myhelper.extension.dismisLoading
 import com.inyongtisto.myhelper.extension.pushActivity
 import com.inyongtisto.myhelper.extension.showLoading
 import com.neonusa.marketplace.NavigationActivity
+import com.neonusa.marketplace.R
 import com.neonusa.marketplace.core.data.source.remote.network.State
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
-import com.neonusa.marketplace.databinding.ActivityLoginBinding
-import com.neonusa.marketplace.util.Prefs
+import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
+import com.neonusa.marketplace.databinding.ActivityRegisterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private val viewModel:  LoginViewModel by viewModel()
-
-    private var _binding: ActivityLoginBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityRegisterBinding
+    private val viewModel: AuthViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        _binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setData()
     }
 
     fun setData() {
-        binding.btnLogin.setOnClickListener {
-            login()
+        binding.btnRegister.setOnClickListener {
+            register()
         }
     }
 
-    fun login(){
+    fun register(){
         // validation
+
+        if (binding.edtName.text!!.isEmpty()){
+            binding.edtName.error = "Nama lengkap tidak boleh kosong"
+            return
+        }
         if (binding.edtEmail.text!!.isEmpty()){
             binding.edtEmail.error = "Email tidak boleh kosong"
+            return
+        }
+        if (binding.edtPhone.text!!.isEmpty()){
+            binding.edtEmail.error = "No. handphone tidak boleh kosong"
             return
         }
         if (binding.edtPassword.text!!.isEmpty()) {
@@ -46,12 +52,14 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        val body = LoginRequest(
+        val body = RegisterRequest(
+            binding.edtName.text.toString(),
             binding.edtEmail.text.toString(),
+            binding.edtPhone.text.toString(),
             binding.edtPassword.text.toString()
         )
 
-        viewModel.login(body).observe(this) {
+        viewModel.register(body).observe(this) {
             when(it.state){
                 State.SUCCESS -> {
                     dismisLoading()
@@ -69,6 +77,4 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
-
-
 }

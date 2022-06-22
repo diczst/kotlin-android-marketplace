@@ -2,10 +2,12 @@ package com.neonusa.marketplace.core.data.repository
 
 import android.util.Log
 import com.inyongtisto.myhelper.extension.getErrorBody
+import com.inyongtisto.myhelper.extension.logs
 import com.neonusa.marketplace.core.data.source.local.LocalDataSource
 import com.neonusa.marketplace.core.data.source.remote.RemoteDataSource
 import com.neonusa.marketplace.core.data.source.remote.network.Resource
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
+import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.util.Prefs
 import kotlinx.coroutines.flow.flow
 
@@ -41,6 +43,29 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         } catch (e: Exception) {
             emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
             Log.e("Login Error : ", e.message ?: "Terjadi Kesalahan")
+        }
+    }
+
+
+    fun register(data: RegisterRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.register(data).let {
+                if (it.isSuccessful) {
+                    Prefs.isLogin = true
+                    val body = it.body()
+                    val user = body?.data
+                    Prefs.setUser(user)
+                    emit(Resource.success(user))
+                    logs("succes:" + body.toString())
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                    logs("Error:" + "keteragan error")
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
+            logs("Error:" + e.message)
         }
     }
 

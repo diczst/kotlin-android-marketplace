@@ -7,10 +7,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.neonusa.marketplace.databinding.ActivityNavigationBinding
-import com.neonusa.marketplace.ui.login.LoginActivity
+import com.neonusa.marketplace.ui.auth.LoginActivity
 import com.neonusa.marketplace.util.Prefs
 
 class NavigationActivity : AppCompatActivity() {
