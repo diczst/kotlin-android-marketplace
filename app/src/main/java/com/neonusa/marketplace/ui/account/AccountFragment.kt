@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.inyongtisto.myhelper.extension.getInitial
+import com.inyongtisto.myhelper.extension.intentActivity
 import com.inyongtisto.myhelper.extension.pushActivity
 import com.neonusa.marketplace.NavigationActivity
 import com.neonusa.marketplace.core.data.source.model.User
 import com.neonusa.marketplace.databinding.FragmentAccountBinding
+import com.neonusa.marketplace.ui.updateprofile.UpdateProfileActivity
 import com.neonusa.marketplace.util.Prefs
 
 class AccountFragment : Fragment() {
@@ -41,6 +43,10 @@ class AccountFragment : Fragment() {
         binding.btnLogout.setOnClickListener {
             Prefs.isLogin = false
             pushActivity(NavigationActivity::class.java)
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            intentActivity(UpdateProfileActivity::class.java)
         }
     }
 
