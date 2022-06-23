@@ -62,16 +62,16 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.register(body).observe(this) {
             when(it.state){
                 State.SUCCESS -> {
-                    dismisLoading()
+//                    dismisLoading()
                     Toast.makeText(this, "Selamat datang : ${it.data?.name}", Toast.LENGTH_SHORT).show()
                     pushActivity(NavigationActivity::class.java)
                 }
                 State.ERROR -> {
-                    dismisLoading()
+//                    dismisLoading()
                     Toast.makeText(this, it.message ?: "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                 }
                 State.LOADING -> {
-                    showLoading()
+//                    showLoading()
                 }
             }
 

@@ -26,12 +26,6 @@ class NavigationActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_navigation)
 
-        // persiapan untuk mengecek menu mana yang ditekan oleh user
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_account, R.id.navigation_cart
-            )
-        )
         // ini dikomentari agar bottomnav tidak berhubungan lagi dengan actionbar yang telah dihilangkan
         // pada values/themes.xml
 //        setupActionBarWithNavController(navController, appBarConfiguration)
@@ -50,8 +44,22 @@ class NavigationActivity : AppCompatActivity() {
                 } else {
                     startActivity(Intent(this, LoginActivity::class.java))
                     Log.d("TAG", "belum login, pindah ke halaman login")
+
+                    // agar animasi clicked icon tidak muncul
+                    return@setOnItemSelectedListener false
                 }
-            } else {
+            } else if (it.itemId == R.id.navigation_account){
+                if(Prefs.isLogin){
+                    Log.d("TAG", "Sudah login")
+                    navController.navigate(it.itemId)
+                } else {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    Log.d("TAG", "belum login, pindah ke halaman login")
+                    // agar animasi clicked icon tidak muncul
+                    return@setOnItemSelectedListener false
+                }
+            }
+            else {
                 navController.navigate(it.itemId)
                 Log.d("TAG", "halaman lain : " + it.title)
             }

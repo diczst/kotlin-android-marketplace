@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.inyongtisto.myhelper.extension.getInitial
 import com.inyongtisto.myhelper.extension.pushActivity
 import com.neonusa.marketplace.NavigationActivity
 import com.neonusa.marketplace.core.data.source.model.User
@@ -50,6 +51,8 @@ class AccountFragment : Fragment() {
                 tvName.text = user.name
                 tvEmail.text = user.email
                 tvPhone.text = user.phone
+
+                tvInitials.text = user.name.getInitial()
             }
         }
     }
