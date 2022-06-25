@@ -18,6 +18,8 @@ import com.neonusa.marketplace.util.Prefs
 
 class AccountFragment : Fragment() {
 
+
+
     private var _binding: FragmentAccountBinding? = null
 
     // This property is only valid between onCreateView and
