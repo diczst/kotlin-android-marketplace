@@ -1,7 +1,11 @@
 package com.neonusa.marketplace.ui.updateprofile
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
+import com.github.drjacky.imagepicker.ImagePicker
+import com.inyongtisto.myhelper.extension.getInitial
 import com.inyongtisto.myhelper.extension.setToolbar
 import com.inyongtisto.myhelper.extension.showToast
 import com.inyongtisto.myhelper.extension.toastError
@@ -10,6 +14,7 @@ import com.neonusa.marketplace.core.data.source.remote.request.UpdateProfileRequ
 import com.neonusa.marketplace.databinding.ActivityUpdateProfileBinding
 import com.neonusa.marketplace.ui.auth.AuthViewModel
 import com.neonusa.marketplace.util.Prefs
+import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateProfileActivity : AppCompatActivity() {
@@ -34,6 +39,7 @@ class UpdateProfileActivity : AppCompatActivity() {
                 edtName.setText(user.name)
                 edtEmail.setText(user.email)
                 edtPhone.setText(user.phone)
+                tvInisial.text = user.name.getInitial()
             }
         }
     }
@@ -41,6 +47,24 @@ class UpdateProfileActivity : AppCompatActivity() {
     private fun mainButton() {
         binding.btnSave.setOnClickListener {
             update()
+        }
+
+        binding.imageProfile.setOnClickListener {
+            pictImage()
+        }
+    }
+
+    private fun pictImage() {
+        ImagePicker.with(this)
+            .maxResultSize(1080, 1080, true)
+            .createIntentFromDialog { launcher.launch(it) }
+    }
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val uri = it.data?.data!!
+            // Use the uri to load the image
+            Picasso.get().load(uri).into(binding.imageProfile)
         }
     }
 

@@ -75,4 +75,11 @@ dependencies {
     // shared preferences ini dapat digunakan pada class yang bukan activity
     // shared preferences ori hanya bisa dipake di class activity
     implementation "com.chibatching.kotpref:kotpref:2.13.1"
+
+    // upload and show image
+    // image picker
+    implementation 'com.github.Drjacky:ImagePicker:2.1.11'
+
+    // display image
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

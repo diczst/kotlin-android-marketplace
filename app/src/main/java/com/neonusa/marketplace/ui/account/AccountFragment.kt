@@ -18,7 +18,12 @@ import com.neonusa.marketplace.util.Prefs
 
 class AccountFragment : Fragment() {
 
-
+    // jika user kembali setelah mengedit data (onbackPressed)
+    // update data baru (agar data terupdate seketika kembali dari halaman edit)
+    override fun onResume() {
+        super.onResume()
+        setUser()
+    }
 
     private var _binding: FragmentAccountBinding? = null
 
