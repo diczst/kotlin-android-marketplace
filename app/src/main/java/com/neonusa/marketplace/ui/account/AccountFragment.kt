@@ -14,7 +14,9 @@ import com.neonusa.marketplace.NavigationActivity
 import com.neonusa.marketplace.core.data.source.model.User
 import com.neonusa.marketplace.databinding.FragmentAccountBinding
 import com.neonusa.marketplace.ui.updateprofile.UpdateProfileActivity
+import com.neonusa.marketplace.util.Constants.USER_URL
 import com.neonusa.marketplace.util.Prefs
+import com.squareup.picasso.Picasso
 
 class AccountFragment : Fragment() {
 
@@ -64,8 +66,9 @@ class AccountFragment : Fragment() {
                 tvName.text = user.name
                 tvEmail.text = user.email
                 tvPhone.text = user.phone
-
                 tvInitials.text = user.name.getInitial()
+
+                Picasso.get().load(USER_URL + user.image).into(binding.imageProfile)
             }
         }
     }

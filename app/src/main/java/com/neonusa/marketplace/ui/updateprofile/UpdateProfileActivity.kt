@@ -5,21 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.github.drjacky.imagepicker.ImagePicker
-import com.inyongtisto.myhelper.extension.getInitial
-import com.inyongtisto.myhelper.extension.setToolbar
-import com.inyongtisto.myhelper.extension.showToast
-import com.inyongtisto.myhelper.extension.toastError
+import com.inyongtisto.myhelper.extension.*
 import com.neonusa.marketplace.core.data.source.remote.network.State
 import com.neonusa.marketplace.core.data.source.remote.request.UpdateProfileRequest
 import com.neonusa.marketplace.databinding.ActivityUpdateProfileBinding
 import com.neonusa.marketplace.ui.auth.AuthViewModel
+import com.neonusa.marketplace.util.Constants
 import com.neonusa.marketplace.util.Prefs
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class UpdateProfileActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModel()
     private lateinit var binding: ActivityUpdateProfileBinding
+
+    private var fileImage: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,22 +41,29 @@ class UpdateProfileActivity : AppCompatActivity() {
                 edtEmail.setText(user.email)
                 edtPhone.setText(user.phone)
                 tvInisial.text = user.name.getInitial()
+
+                Picasso.get().load(Constants.USER_URL + user.image).into(binding.imageProfile)
             }
         }
     }
 
     private fun mainButton() {
         binding.btnSave.setOnClickListener {
-            update()
+            if (fileImage != null) {
+                upload()
+            } else {
+                update()
+            }
         }
 
         binding.imageProfile.setOnClickListener {
-            pictImage()
+            pickImage()
         }
     }
 
-    private fun pictImage() {
+    private fun pickImage() {
         ImagePicker.with(this)
+            .crop()
             .maxResultSize(1080, 1080, true)
             .createIntentFromDialog { launcher.launch(it) }
     }
@@ -63,6 +71,10 @@ class UpdateProfileActivity : AppCompatActivity() {
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data!!
+
+            // konversi uri menjadi File
+            fileImage = File(uri.path ?: "")
+
             // Use the uri to load the image
             Picasso.get().load(uri).into(binding.imageProfile)
         }
@@ -102,6 +114,27 @@ class UpdateProfileActivity : AppCompatActivity() {
                 }
                 State.ERROR -> {
 //                    progress.dismiss()
+                    toastError(it.message ?: "Error")
+                }
+                State.LOADING -> {
+//                    progress.show()
+                }
+            }
+        }
+    }
+
+    private fun upload() {
+        val idUser = Prefs.getUser()?.id
+
+        // konversi dari tipe File ke Multipart Body
+        val file = fileImage.toMultipartBody()
+
+        viewModel.uploadUser(idUser, file).observe(this) {
+            when (it.state) {
+                State.SUCCESS -> {
+                    update()
+                }
+                State.ERROR -> {
                     toastError(it.message ?: "Error")
                 }
                 State.LOADING -> {
