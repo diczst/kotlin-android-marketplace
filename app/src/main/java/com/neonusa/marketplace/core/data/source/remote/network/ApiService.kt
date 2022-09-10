@@ -1,9 +1,11 @@
 package com.neonusa.marketplace.core.data.source.remote.network
 
+import com.neonusa.marketplace.core.data.source.model.AlamatToko
 import com.neonusa.marketplace.core.data.source.remote.request.CreateTokoRequest
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
 import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.core.data.source.remote.request.UpdateProfileRequest
+import com.neonusa.marketplace.core.data.source.remote.response.BaseListResponse
 import com.neonusa.marketplace.core.data.source.remote.response.BaseResponse
 import com.neonusa.marketplace.core.data.source.remote.response.LoginResponse
 import com.neonusa.marketplace.core.data.source.remote.response.TokoResponse
@@ -47,4 +49,8 @@ interface ApiService {
         @Path("id") int: Int? = null
     ): Response<LoginResponse>
 
+    @GET("alamat-toko/{id}")
+    suspend fun getAlamatToko(
+        @Path("id") idToko: Int? = null
+    ): Response<BaseListResponse<AlamatToko>>
 }

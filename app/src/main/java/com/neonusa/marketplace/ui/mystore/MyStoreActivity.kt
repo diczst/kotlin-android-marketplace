@@ -3,9 +3,11 @@ package com.neonusa.marketplace.ui.mystore
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.inyongtisto.myhelper.extension.getInitial
+import com.inyongtisto.myhelper.extension.intentActivity
 import com.inyongtisto.myhelper.extension.setToolbar
 import com.neonusa.marketplace.R
 import com.neonusa.marketplace.databinding.ActivityMyStoreBinding
+import com.neonusa.marketplace.ui.alamattoko.StoreAddressActivity
 import com.neonusa.marketplace.util.Constants
 import com.neonusa.marketplace.util.Prefs
 import com.squareup.picasso.Picasso
@@ -20,6 +22,7 @@ class MyStoreActivity : AppCompatActivity() {
 
         setToolbar(binding.lyToolbar.toolbar,"Toko Saya")
         setData()
+        setupListener()
     }
 
     private fun setData() {
@@ -32,6 +35,14 @@ class MyStoreActivity : AppCompatActivity() {
                     Picasso.get().load(Constants.USER_URL + user.toko?.name)
                         .into(binding.imageProfile)
                 }
+            }
+        }
+    }
+
+    private fun setupListener() {
+        binding.apply {
+            btnAlamat.setOnClickListener {
+                intentActivity(StoreAddressActivity::class.java)
             }
         }
     }

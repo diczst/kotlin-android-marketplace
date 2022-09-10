@@ -18,3 +18,5 @@ object Prefs: KotprefModel() {
         return user.toModel(User::class.java)
     }
 }
+
+fun getTokoId() = Prefs.getUser()?.toko?.id

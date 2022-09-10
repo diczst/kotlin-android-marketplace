@@ -157,6 +157,27 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+    fun getAlamatToko() = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.getAlamatToko().let {
+                if (it.isSuccessful) {
+                    val body = it.body()
+                    val data = body?.data
+
+                    emit(Resource.success(data))
+                    Log.i("TAG", "getUser: {${it.body()}}")
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                    Log.i("TAG", "getUser: {${it.getErrorBody()?.message}}")
+
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
+        }
+    }
+
     // beberapa kasus jika jsonObject errorbody berbeda maka buat class baru dengan
     // atribut-atribut yang sama seperti yang ada di api
     class ErrorCustom(
