@@ -3,13 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_navigation.xml" value="0.2" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/drawable/ic_asset_gold.xml" value="0.1" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/drawable/ic_notification.xml" value="0.1795" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/drawable/ic_placeholder.xml" value="0.1795" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.1795" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_navigation.xml" value="0.17" />
         <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_update_profile.xml" value="0.153125" />
-        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_account.xml" value="0.153125" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/activity_update_profile.xml" value="0.18" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_account.xml" value="0.18" />
         <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_cart.xml" value="0.1" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_dashboard.xml" value="0.15" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/fragment_notifications.xml" value="0.153125" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/ic_placeholder.xml" value="0.15234375" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/item_home_best_seller.xml" value="0.15234375" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/item_home_category.xml" value="0.15" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/item_home_new_product.xml" value="0.18" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/item_home_slider.xml" value="0.153125" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/layout_home_category.xml" value="0.153125" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/layout_home_member.xml" value="0.2" />
+        <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/layout/layout_home_toolbar.xml" value="0.16" />
         <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18" />
         <entry key="..\:/Selain Kuliah/android-dev-projects/Marketplace/app/src/main/res/xml/network_security.xml" value="0.1" />
       </map>

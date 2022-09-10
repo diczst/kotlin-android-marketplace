@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel: AuthViewModel by viewModel()
+    private val viewModel: AuthViewModel by viewModel() // lazy inject
 
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding!!
@@ -53,6 +53,15 @@ class LoginActivity : AppCompatActivity() {
             binding.edtEmail.text.toString(),
             binding.edtPassword.text.toString()
         )
+
+
+        // it ini mewakili sebuah objek Resource dengan tiga atribut
+        // state, message, dan data
+        // setelah melakukan pengecekan atribut state kita bisa ambil
+        // data atribut messagenya sesuai yang sudah ktia emit di AppRepository
+
+        // state milik objek resource ini tergantung dengan fungsi mana yang kita panggil
+        // yang juga tergantung dengan kondisi if mana yang memenuhi di AppRepository
 
         viewModel.login(body).observe(this) {
             when(it.state){

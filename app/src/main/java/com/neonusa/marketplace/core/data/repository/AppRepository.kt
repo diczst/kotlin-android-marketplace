@@ -31,6 +31,8 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 } else {
 
                     // REMINDER : method getErrorBody ini berasal dari library milik mas inyong tisto
+                    // fungsinya agar kita tetap mengambil error message dari api
+                    // meskipun response nya tidak successful
 
                     // dalam kasus aplikasi marketplace
                     emit(Resource.error( it.getErrorBody()?.message ?: "Error Default", null))
