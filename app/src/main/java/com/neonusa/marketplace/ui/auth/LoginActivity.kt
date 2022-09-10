@@ -7,10 +7,9 @@ import android.widget.Toast
 import com.inyongtisto.myhelper.extension.dismisLoading
 import com.inyongtisto.myhelper.extension.pushActivity
 import com.inyongtisto.myhelper.extension.showLoading
-import com.neonusa.marketplace.NavigationActivity
+import com.neonusa.marketplace.ui.navigation.NavigationActivity
 import com.neonusa.marketplace.core.data.source.remote.network.State
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
-import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.databinding.ActivityLoginBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

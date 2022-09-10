@@ -1,18 +1,20 @@
 package com.neonusa.marketplace.ui.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.inyongtisto.myhelper.extension.getInitial
 import com.inyongtisto.myhelper.extension.intentActivity
 import com.inyongtisto.myhelper.extension.pushActivity
-import com.neonusa.marketplace.NavigationActivity
-import com.neonusa.marketplace.core.data.source.model.User
+import com.inyongtisto.myhelper.extension.toGone
+import com.neonusa.marketplace.ui.navigation.NavigationActivity
 import com.neonusa.marketplace.databinding.FragmentAccountBinding
+import com.neonusa.marketplace.ui.mystore.MyStoreActivity
+import com.neonusa.marketplace.ui.store.OpenStoreActivity
 import com.neonusa.marketplace.ui.updateprofile.UpdateProfileActivity
 import com.neonusa.marketplace.util.Constants.USER_URL
 import com.neonusa.marketplace.util.Prefs
@@ -57,6 +59,10 @@ class AccountFragment : Fragment() {
         binding.btnUpdate.setOnClickListener {
             intentActivity(UpdateProfileActivity::class.java)
         }
+
+        binding.btnToko.setOnClickListener {
+            intentActivity(OpenStoreActivity::class.java)
+        }
     }
 
     private fun setUser(){
@@ -69,6 +75,18 @@ class AccountFragment : Fragment() {
                 tvInitials.text = user.name.getInitial()
 
                 Picasso.get().load(USER_URL + user.image).into(binding.imageProfile)
+
+                if (user.toko != null) {
+                    tvStatusToko.toGone()
+                    tvNameToko.text = user.toko?.name
+                    binding.btnToko.setOnClickListener {
+                        intentActivity(MyStoreActivity::class.java)
+                    }
+                } else {
+                    binding.btnToko.setOnClickListener {
+                        intentActivity(OpenStoreActivity::class.java)
+                    }
+                }
             }
         }
     }

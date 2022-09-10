@@ -18,13 +18,19 @@
         android:theme="@style/Theme.Marketplace"
         tools:targetApi="31">
         <activity
+            android:name=".ui.mystore.MyStoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.store.OpenStoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.updateprofile.UpdateProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigationActivity"
+            android:name=".ui.navigation.NavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation">
 

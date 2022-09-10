@@ -6,6 +6,7 @@ import com.inyongtisto.myhelper.extension.logs
 import com.neonusa.marketplace.core.data.source.local.LocalDataSource
 import com.neonusa.marketplace.core.data.source.remote.RemoteDataSource
 import com.neonusa.marketplace.core.data.source.remote.network.Resource
+import com.neonusa.marketplace.core.data.source.remote.request.CreateTokoRequest
 import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
 import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.core.data.source.remote.request.UpdateProfileRequest
@@ -80,9 +81,14 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
                 if (it.isSuccessful) {
                     val body = it.body()
                     val user = body?.data
+
+                    // agar kalau user rubah data, data toko tidak hilang
+                    user?.toko = Prefs.getUser()?.toko
+
                     Prefs.setUser(user)
                     emit(Resource.success(user))
                     logs("succes:" + body.toString())
+                    Log.i("TAG", "updateUser: $user")
                 } else {
                     emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
                     logs("Error:" + "keteragan error")
@@ -112,6 +118,42 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         } catch (e: Exception) {
             emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
             logs("Error:" + e.message)
+        }
+    }
+
+    fun createToko(data: CreateTokoRequest) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.createToko(data).let {
+                if (it.isSuccessful) {
+                    val body = it.body()?.data
+                    emit(Resource.success(body))
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
+        }
+    }
+
+    fun getUser(id: Int? = null) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.getUser(id).let {
+                if (it.isSuccessful) {
+                    val body = it.body()
+                    val user = body?.data
+                    Prefs.setUser(user)
+                    emit(Resource.success(user))
+                    Log.i("TAG", "getUser: {${it.body()}}")
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                    Log.i("TAG", "getUserError: ${it.getErrorBody()?.message}")
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
         }
     }
 

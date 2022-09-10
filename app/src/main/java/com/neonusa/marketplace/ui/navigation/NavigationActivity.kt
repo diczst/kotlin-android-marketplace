@@ -1,4 +1,4 @@
-package com.neonusa.marketplace
+package com.neonusa.marketplace.ui.navigation
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,22 +6,33 @@ import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.neonusa.marketplace.R
 import com.neonusa.marketplace.databinding.ActivityNavigationBinding
 import com.neonusa.marketplace.ui.auth.LoginActivity
 import com.neonusa.marketplace.util.Prefs
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavigationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNavigationBinding
+    private val viewModel: NavViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupNav()
+        getUser()
+    }
 
+    private fun getUser() {
+        viewModel.getUser(Prefs.getUser()?.id ?: 0).observe(this) {}
+    }
+
+    private fun setupNav(){
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_navigation)
@@ -66,5 +77,10 @@ class NavigationActivity : AppCompatActivity() {
 
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }
