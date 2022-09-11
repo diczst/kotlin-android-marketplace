@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Marketplace"
         tools:targetApi="31">
         <activity
+            android:name=".ui.alamattoko.EditStoreAddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.alamattoko.AddStoreAddressActivity"
             android:exported="false" />
         <activity

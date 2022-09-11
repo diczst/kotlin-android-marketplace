@@ -11,6 +11,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
+// PENGINGAT
+// SEMENTARA ABAIKAN SAJA ERROR
+/**
+Unable to add window -- token android.os.BinderProxy@842cf15 is not
+ * */
+// ERROR INI DARI LIBRARY LOADING MAS INYONG
+
 class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()

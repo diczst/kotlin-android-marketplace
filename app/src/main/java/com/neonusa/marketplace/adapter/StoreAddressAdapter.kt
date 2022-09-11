@@ -4,8 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.inyongtisto.myhelper.extension.intentActivity
+import com.inyongtisto.myhelper.extension.logs
+import com.inyongtisto.myhelper.extension.popUpMenu
+import com.inyongtisto.myhelper.extension.toJson
 import com.neonusa.marketplace.core.data.source.model.AlamatToko
 import com.neonusa.marketplace.databinding.ItemAlamatTokoBinding
+import com.neonusa.marketplace.ui.alamattoko.EditStoreAddressActivity
 
 @SuppressLint("NotifyDataSetChanged")
 class StoreAddressAdapter : RecyclerView.Adapter<StoreAddressAdapter.ViewHolder>() {
@@ -25,6 +30,21 @@ class StoreAddressAdapter : RecyclerView.Adapter<StoreAddressAdapter.ViewHolder>
                     "${item.alamat}$kecamatan, ${item.kota}, ${item.provinsi}, ${item.kodepost}"
                 tvEmail.text = item.email
                 tvPhone.text = item.phone
+
+                val context = root.context
+                btnMenu.setOnClickListener {
+                    val listMenu = listOf("detail","hapus")
+                    root.context.popUpMenu(btnMenu,listMenu){
+                        when(it){
+                            "detail" -> context.intentActivity(
+                                EditStoreAddressActivity::class.java,
+                                item.toJson()
+                            )
+                            "hapus" -> logs("hapus")
+                        }
+                    }
+                }
+
             }
         }
     }
