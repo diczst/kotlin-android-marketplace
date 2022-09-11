@@ -3,11 +3,12 @@ package com.neonusa.marketplace.ui.alamattoko
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.inyongtisto.myhelper.extension.toGone
-import com.inyongtisto.myhelper.extension.toVisible
+import androidx.constraintlayout.motion.widget.TransitionBuilder.validate
+import com.inyongtisto.myhelper.extension.*
 import com.neonusa.marketplace.adapter.StoreAddressAdapter
 import com.neonusa.marketplace.core.data.source.remote.network.State
 import com.neonusa.marketplace.databinding.ActivityStoreAdressBinding
+import com.neonusa.marketplace.ui.mystore.MyStoreActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -20,6 +21,7 @@ class StoreAddressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreAdressBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setToolbar(binding.lyToolbar.toolbar, "List Alamat")
 
         mainButton()
         getData()
@@ -56,7 +58,17 @@ class StoreAddressActivity : AppCompatActivity() {
     }
 
     private fun mainButton() {
+        binding.apply {
+            lyToolbar.btnTambah.toVisible()
+            lyToolbar.btnTambah.setOnClickListener {
+                intentActivity(AddStoreAddressActivity::class.java)
+            }
+        }
+    }
 
+    override fun onResume() {
+        getData()
+        super.onResume()
     }
 
     override fun onSupportNavigateUp(): Boolean {

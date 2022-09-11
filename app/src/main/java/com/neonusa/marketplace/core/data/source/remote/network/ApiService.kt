@@ -6,11 +6,10 @@ import com.neonusa.marketplace.core.data.source.remote.request.LoginRequest
 import com.neonusa.marketplace.core.data.source.remote.request.RegisterRequest
 import com.neonusa.marketplace.core.data.source.remote.request.UpdateProfileRequest
 import com.neonusa.marketplace.core.data.source.remote.response.BaseListResponse
-import com.neonusa.marketplace.core.data.source.remote.response.BaseResponse
+import com.neonusa.marketplace.core.data.source.remote.response.BaseSingleResponse
 import com.neonusa.marketplace.core.data.source.remote.response.LoginResponse
 import com.neonusa.marketplace.core.data.source.remote.response.TokoResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -42,7 +41,7 @@ interface ApiService {
     @POST("toko")
     suspend fun createToko(
         @Body data: CreateTokoRequest
-    ): Response<BaseResponse<TokoResponse>>
+    ): Response<BaseSingleResponse<TokoResponse>>
 
     @GET("toko-user/{id}")
     suspend fun getUser(
@@ -53,4 +52,8 @@ interface ApiService {
     suspend fun getAlamatToko(
         @Path("id") idToko: Int? = null
     ): Response<BaseListResponse<AlamatToko>>
-}
+
+    @POST("alamat-toko")
+    suspend fun createAlamatToko(
+        @Body data: AlamatToko
+    ): Response<BaseSingleResponse<AlamatToko>>}
